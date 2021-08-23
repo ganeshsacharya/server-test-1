@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "express": "^4.17.1",
+    "hbs": "^4.1.2",
+    "postman-request": "^2.88.1-postman.30"
+  },
+  "name": "server_test_1",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ganeshsacharya/server-test-1/issues"
+  },
+  "homepage": "https://github.com/ganeshsacharya/server-test-1#readme",
+  "description": ""
+}
