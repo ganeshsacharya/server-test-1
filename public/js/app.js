@@ -28,8 +28,32 @@ fetch("http://localhost:3000/subBreed?dogBreed="+value).then((response)=>{
             for(index in data.subBreedList) {
                 select.options[select.options.length] = new Option(data.subBreedList[index], data.subBreedList[index]);
             }
+            if(data.subBreedList.length==0){
+                select.options[select.options.length] = new Option("Sub Breed Not Available", "undefined");
+            }
             
         }
     })
 })
 }
+const getImages =document.querySelector('form')
+getImages.addEventListener('submit',(e)=>{
+    e.preventDefault();
+    let dogBreed = document.getElementById('mainDogBreed').selectedOptions[0].value
+    let subDogBreed = document.getElementById('subDogBreed').selectedOptions[0].value
+    console.log(subDogBreed);
+    if(subDogBreed=="undefined"){
+        subDogBreed=undefined
+    }
+    fetch('http://localhost:3000/pagination?dogBreed='+dogBreed+'&subBreed='+subDogBreed+'&page=170').then((response)=>{
+        response.json().then((data)=>{
+            if(!data.success){
+                errorDispaly.textContent=data.error
+            }else{
+                let images=data.dogImages
+                console.log(images);
+            }
+        })
+    })
+
+})
