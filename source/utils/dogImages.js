@@ -1,13 +1,14 @@
 const request = require('postman-request')
 const subBreed = require('./subBreed')
-const imagesOfDog=((dogBreed,subBreed,callback)=>{
+const imagesOfDog=((dogBreed,subBreed="none",callback)=>{
     let url="https://dog.ceo/api/breed/"+encodeURIComponent(dogBreed)
-    console.log(subBreed);
-    if(!subBreed){
+   
+    
+    if(!subBreed&& subBreed.length>0){
         url +="/"+encodeURIComponent(subBreed)
     }
     url +="/images"
-    console.log(url);
+    console.log("dog Images",url);
     request({url,json:true},(error,response,body) =>{
         if(error){
             callback("Can't connect to Server please try again", undefined)
