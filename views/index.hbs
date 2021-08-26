@@ -6,12 +6,12 @@
     </head>
     <body>
         <p id="error"></p>
-        <form>
+        <form method="POST" action="/postRequest">
             <label for="Dog Breeds">Dog Breeds</label>
-            <select name="Dog Breeds" onclick="subBreed(this.value)" id="mainDogBreed" required>
+            <select name="DogBreeds" onclick="subBreed(this.value)" id="mainDogBreed" required>
             </select>
             <label for=" Sub Dog Breeds">Dog Breeds</label>
-            <select name="Sub Dog Breeds" id="subDogBreed" required>
+            <select name="SubDogBreeds" id="subDogBreed" required>
             </select>
             <button >Search Images</button>
         </form>

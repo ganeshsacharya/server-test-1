@@ -37,7 +37,7 @@ fetch("http://localhost:3000/subBreed?dogBreed="+value).then((response)=>{
 })
 }
 const getImages =document.querySelector('form')
-getImages.addEventListener('submit',(e)=>{
+/*getImages.addEventListener('submit',(e)=>{
     e.preventDefault();
     let dogBreed = document.getElementById('mainDogBreed').selectedOptions[0].value
     let subDogBreed = document.getElementById('subDogBreed').selectedOptions[0].value
@@ -45,7 +45,7 @@ getImages.addEventListener('submit',(e)=>{
     if(subDogBreed=="undefined"){
         subDogBreed=undefined
     }
-    fetch('http://localhost:3000/pagination?dogBreed='+dogBreed+'&subBreed='+subDogBreed+'&page=170').then((response)=>{
+    fetch('http://localhost:3000/pagination?dogBreed='+dogBreed+'&subBreed='+subDogBreed+'&page=10').then((response)=>{
         response.json().then((data)=>{
             if(!data.success){
                 errorDispaly.textContent=data.error
@@ -56,4 +56,4 @@ getImages.addEventListener('submit',(e)=>{
         })
     })
 
-})
+})*/
