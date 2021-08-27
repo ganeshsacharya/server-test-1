@@ -6,6 +6,7 @@ const axios=require('axios')
 const subBreed = require('./utils/subBreed')
 const dogImages = require('./utils/dogImages')
 const bulkImages = require('./utils/sendBulkImages')
+const { response } = require('express')
 
 const app =  express()
 const staticPath = path.join(__dirname,'../public')//creating the static path for browser JS
@@ -25,7 +26,7 @@ app.get('/dogBreed',async (req,res)=>{
         res.statusCode=200
         res.setHeader("content-type","application/json")
         let dogBreeds={dogBreedList:Object.keys(dogBreedData.data.message)}
-        return res.send(dogBreeds)
+        return res.status(202).send(dogBreeds)
 
     } catch (error) {
         res.statusCode=404
@@ -78,20 +79,15 @@ app.get('/pagination',(req,res)=>{
 
 app.post('/getImagesByBreed/bulk', async(req,res)=>{
     let dogBreedInput = req.query.breed
-    if(typeof(dogBreedInput)==="string"){
-        dogBreedInput=[dogBreedInput]
-    }
+    console.log(dogBreedInput);
     let images={}
-    let imageData=[]
-    let dogBreedName=[]
-    dogBreedInput.forEach(async (dogBreed)=>{
-            dogBreedName.push(dogBreed)
-            imageData.push(bulkImages(dogBreed))
-        })
-        let dogBreedImageData= await Promise.all(imageData)
-        for(let index=0;index<dogBreedImageData.length;index++){
-            images[dogBreedName[index]]=dogBreedImageData[index]
-        }
+    let dogBreedImage =  dogBreedInput.map((dogBreedName)=>{
+       return bulkImages(dogBreedName)
+    })
+    let dogBreedImageData= await Promise.all(dogBreedImage)
+    dogBreedImageData.map((dogBreedImages,index)=>{
+        images[dogBreedInput[index]]=dogBreedImageData[index]
+    })
     return res.send(images)
 })
 
