@@ -8,7 +8,7 @@ router.use((req, res, next) =>{
     next();
   });
   
-router.route("/dogBreedList")
+router.route("/dogBreedList")// the url is breeds/dogBreedList. router.route method is used to get the url.
 .get(async(req,res)=>{
     try {
         axios.get('https://dog.ceo/api/breeds/list/all')
