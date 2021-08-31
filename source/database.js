@@ -1,6 +1,8 @@
 const express = require('express')
 const mysql = require("mysql")
 const database = require("./routes/db")
+
+const app = express()
 //MYSQL connection 
 app.use("/database", database)
 const db  = mysql.createConnection({
@@ -17,7 +19,7 @@ db.connect(err=>{
     }
     console.log("MYSQL is connected....,")
 })
-const app= express()
+
 app.get("/createDB", (req,res)=>{
     let sql="CREATE DATABASE nodesql"
     db.query(sql,(err)=>{
