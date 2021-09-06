@@ -1,22 +1,26 @@
-const express = require('express')
-const path = require('path')
-const breeds= require('./routes/breeds.js')
+const express = require("express")
+const {answer,sequelize, inventory, question}  = require("D:/Node/Inventory/models")
+const userRouter = require("./routes/users")
+const qna= require("./routes/qna")
+const app= express()
 
-const app =  express()
-const staticPath = path.join(__dirname,'../public')//creating the static path for browser JS
-const viewsPath = path.join(__dirname,"../views")
+app.use("/user",userRouter)
+app.use("/question",qna)
 
-app.use("/breed",breeds) //Used for routing.
-app.set('view engine','hbs')
-app.set("views",viewsPath)
-app.use(express.static(staticPath))
-
-app.get("",(req,res)=>{
-    res.render('index.hbs')
+app.post("*", (req,res)=>{
+    return res.status(404).send({error:"Page not found"})
 })
-app.get('*',  (req,res)=>{
-    res.status(404).send({errorMessage:"404.. Requested page didn't found"})
+app.get("*", (req,res)=>{
+    return res.status(404).send({error:"Page not found"})
 })
-app.listen(3000,()=>{
-    console.log("server started on localhost:3000...");
+app.listen(3000,async ()=>{
+    await sequelize.authenticate()
+    .then(async()=>{
+        await sequelize.sync()
+        console.log("connection success...");
+    })
+    .catch((error)=>{ 
+        console.log(error)     
+        console.log("unable to connect");
+    })
 })
