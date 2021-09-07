@@ -6,6 +6,7 @@ const app= express()
 
 app.use("/user",userRouter)
 app.use("/question",qna)
+app.use(express.json())
 
 app.post("*", (req,res)=>{
     return res.status(404).send({error:"Page not found"})
